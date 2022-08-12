@@ -1,0 +1,38 @@
+<p>cost works!</p>
+<form id="cost" [formGroup]="cost" style="width:90%">
+  <div>
+    <div style="width: 2000px;">
+      <div style="width: 600px; float: left">
+        <label>BYG Group :  </label>
+        <input type="text" matInput formControlName="byggroup">
+      </div>
+      <div style="width: 900px; float: left">
+        <label>Vendor :  </label>
+        <input type="text" matInput formControlName="vendor">
+      </div>
+    </div>
+    <div style="width:2000px;">
+      <div style="width: 900px; float: left">
+        <label>Item Code :  </label>
+        <input type="text" matInput formControlName="itemcode">
+        <button mat-raised-button (click)="myClickFunction()">Get</button>
+      </div>
+    </div>
+    <div style="width:2000px">
+      <div style="width: 900px; float: left">
+        <label>From :  </label>
+        <input type="text" matInput formControlName="startdate">
+      </div>
+      <div style="width: 900px; float: left">
+        <label>To :  </label>
+        <input type="text" matInput formControlName="enddate">
+      </div>
+    </div>
+    <div style="width:2000px">
+      <div style="width: 900px; float: left">
+        <label>List Cost :  </label>
+        <input type="text" matInput formControlName="listcost">
+      </div>
+    </div>
+  </div>
+</form>

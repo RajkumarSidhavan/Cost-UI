@@ -15,6 +15,7 @@ import { CostService } from "./services/cost.service";
 /* Angular material */
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './material.module';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,9 @@ import { AngularMaterialModule } from './material.module';
     MatInputModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    MatTableModule,
   ],
+  exports: [MatTableModule, MatInputModule],
   providers: [
     CostService,
     //{ provide: ErrorHandler, useClass: AppErrorHandler },

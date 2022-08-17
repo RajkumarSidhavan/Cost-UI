@@ -4,19 +4,25 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { MatInputModule } from '@angular/material/input'
 
 import { CostService } from "src/app/services/cost.service";
-import { Cost } from "../../models/cost";
-
+import { Cost, item } from "../../models/cost";
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-cost',
   templateUrl: './cost.component.html',
   styleUrls: ['./cost.component.css']
-})
+}) 
 export class CostComponent implements OnInit {
 
-
-  costmodel!: Cost[];
+  itemlist !: item[];
+  costmodel!: Cost;
   itemcode !: string;
+
+  public displayedColumnsVendors = ['allocation_type', 'amount', 'user_id'];
+  public displayedColumnsItem = ['deal_type', 'deal_amount', 'deal_amount_type','invoice_code'];
+
+  public dataSourceVendor = new MatTableDataSource<any>();
+  public dataSourceItem = new MatTableDataSource<any>();
 
   constructor(private readonly formBuilder: FormBuilder, private costService: CostService) {
     
@@ -53,18 +59,21 @@ export class CostComponent implements OnInit {
   }
 
   async getallcostinfo(itemcode : any) {
-    this.costService.getAllCostInfo(itemcode).subscribe((res) => {
-      
+    this.costService.getAllCostInfo(itemcode).subscribe((res) => {     
+
       this.costmodel = res;      
       
-      console.log(this.costmodel);      
+      console.log(this.costmodel);
+          
+      this.cost.controls["itemcode"].setValue(this.costmodel.item[0].item_code);
+      this.cost.controls["startdate"].setValue(this.costmodel.item[0].start_date);
+      this.cost.controls["enddate"].setValue(this.costmodel.item[0].end_date);
+      this.cost.controls["listcost"].setValue(this.costmodel.item[0].list_cost);
 
-      this.cost.controls["itemcode"].setValue(this.costmodel[0].item_code);
-      this.cost.controls["startdate"].setValue(this.costmodel[0].start_date);
-      this.cost.controls["enddate"].setValue(this.costmodel[0].end_date);
-      this.cost.controls["listcost"].setValue(this.costmodel[0].list_cost);
+      this.dataSourceVendor.data = this.costmodel.vendorAllowances;
+      this.dataSourceItem.data = this.costmodel.itemAllowances;
 
-      
+
     });
   }
 

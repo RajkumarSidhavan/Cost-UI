@@ -1,4 +1,48 @@
 <p>cost works!</p>
+
+<style>
+  table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+  }
+
+  /* Structure */
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+    text-align: left;
+  }
+
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .mat-table {
+    overflow: auto;
+    max-height: 1000px;
+  }
+
+  mat-cell,
+  mat-header-cell {
+    word-wrap: initial;
+    display: table-cell;
+    line-break: unset;
+    width: auto;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+</style>
 <form id="cost" [formGroup]="cost" style="width:90%">
   <div>
     <div style="width: 2000px;">
@@ -35,4 +79,51 @@
       </div>
     </div>
   </div>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSourceVendor">
+      <ng-container matColumnDef="allocation_type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Allocation Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.allocation_type}}  </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.amount}}  </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="user_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> User ID </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.user_id}}  </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumnsVendors"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsVendors;"></mat-row>
+
+    </mat-table>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table [dataSource]="dataSourceItem">
+      <ng-container matColumnDef="deal_type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Deal Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.deal_type}}  </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="deal_amount">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Deal Amount </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.deal_amount}}  </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="deal_amount_type">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Deal Amount Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.deal_amount_type}}  </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="invoice_code">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Invoice Code </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.invoice_code}}  </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumnsItem"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumnsItem;"></mat-row>
+
+    </mat-table>
+  </div>
 </form>
+
